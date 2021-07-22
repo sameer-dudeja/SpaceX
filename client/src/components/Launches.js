@@ -17,7 +17,7 @@ export default function Launches() {
 
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
-  console.log(data)
+  // console.log(data)
   return (
     <>
       <h1 className='display-4 my-3'>Launches</h1>
