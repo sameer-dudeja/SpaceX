@@ -1,16 +1,6 @@
-import React, { Component } from 'react'
-import {
-  ApolloClient,
-  InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql,
-} from '@apollo/client'
+import React from 'react'
+import { useQuery, gql } from '@apollo/client'
 import LaunchItem from './LaunchItem'
-const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql',
-  cache: new InMemoryCache(),
-})
 
 const LAUNCHES_QUERY = gql`
   query LaunchesQuery {
@@ -18,11 +8,11 @@ const LAUNCHES_QUERY = gql`
       flight_number
       mission_name
       launch_date_local
-      launch_succes
+      launch_success
     }
   }
 `
-function LaunchesQ() {
+export default function Launches() {
   const { loading, error, data } = useQuery(LAUNCHES_QUERY)
 
   if (loading) return <p>Loading...</p>
@@ -30,23 +20,10 @@ function LaunchesQ() {
   console.log(data)
   return (
     <>
+      <h1 className='display-4 my-3'>Launches</h1>
       {data.launches.map((launch) => (
         <LaunchItem key={launch.flight_number} launch={launch} />
       ))}
     </>
   )
 }
-export class Launches extends Component {
-  render() {
-    return (
-      <>
-        <ApolloProvider client={client}>
-          <h1 className='display-4 my-3'>Launches</h1>
-          <LaunchesQ />
-        </ApolloProvider>
-      </>
-    )
-  }
-}
-
-export default Launches
