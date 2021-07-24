@@ -23,7 +23,7 @@ function App() {
             />
           </header>
           <Route exact path='/' component={Launches} />
-          <Route exact path='/lauches/:flight_number' component={Launch} />
+          <Route exact path='/launch/:flight_number' component={Launch} />
         </div>
       </BrowserRouter>
     </ApolloProvider>
